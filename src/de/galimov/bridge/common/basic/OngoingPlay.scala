@@ -40,4 +40,10 @@ class OngoingPlay(val deal: Deal, val contract: Contract, val remainingCards: Ma
   def currentPlayer: Player = ongoingTrick.currentPlayer
 
   def currentPlayerIsNs = currentPlayer == South || currentPlayer == North
+
+  override def equals(obj: scala.Any): Boolean = obj.isInstanceOf[OngoingPlay] &&
+    obj.asInstanceOf[OngoingPlay].remainingCards.equals(remainingCards) &&
+    obj.asInstanceOf[OngoingPlay].ongoingTrick.equals(ongoingTrick)
+
+  override def hashCode(): Int = remainingCards.hashCode() * 31 + ongoingTrick.hashCode()
 }
